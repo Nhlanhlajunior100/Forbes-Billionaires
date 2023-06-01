@@ -1,5 +1,5 @@
 # Forbes-Billionaires
-Investigates the 2022 Forbes Billionaire list and their companies.
+Investigates the 2022 Forbes Billionaire list and their companies. This dataset was published on kaggle by gsusAguirreArz.
 
 The ForbesBillionaires.sqbpro contains the queries performed on the forbes_billionaires_2022.csv and forbes_companies_2022.csv datasets.
 
