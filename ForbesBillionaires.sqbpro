@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/Nhlan/Desktop/Files/Data Analytics Projects/archive/forbes_dataset_2022/ForbesBillionares.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="150"/><column_width id="3" width="3034"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,24:mainforbes_billionaires_2022"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="forbes_billionaires_2022" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="61"/><column index="2" value="300"/><column index="3" value="61"/><column index="4" value="120"/><column index="5" value="248"/><column index="6" value="300"/><column index="7" value="196"/><column index="8" value="136"/><column index="9" value="205"/><column index="10" value="300"/><column index="11" value="103"/><column index="12" value="84"/><column index="13" value="111"/><column index="14" value="147"/><column index="15" value="61"/><column index="16" value="404"/><column index="17" value="300"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="forbes_companies_2022" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="7" mode="0"/></sort><column_widths><column index="1" value="61"/><column index="2" value="300"/><column index="3" value="196"/><column index="4" value="97"/><column index="5" value="97"/><column index="6" value="114"/><column index="7" value="139"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">/* Investrigating billionaires and their sources of income
+Author: Nhlanhla Hlengane
+Date: 10/03/2023
+*/
+
+-- who are the top 10 billionaires
+SELECT [rank], personName, age, finalWorth, source, country,bio, about
+FROM forbes_billionaires_2022
+--WHERE country = 'South Africa'
+LIMIT 5
+
+
+
+-- Which industry has the most billionaires?
+SELECT category, Count(*) AS [Number of Billionaires in this industry]
+FROM forbes_billionaires_2022
+GROUP BY category
+ORDER BY [Number of Billionaires in this industry] DESC
+
+--Which sources are most profitable in fincance &amp; investments
+SELECT DISTINCT category, source,count(*)
+FROM forbes_billionaires_2022
+WHERE category = 'Finance &amp; Investments'
+GROUP BY category, source
+ORDER BY count(*) DESC
+
+--Which sources are most profitable in Technology
+SELECT DISTINCT category, source,count(*)
+FROM forbes_billionaires_2022
+WHERE category = 'Technology'
+GROUP BY category, source
+ORDER BY count(*) DESC
+
+--Which sources are most profitable in Manufacturing
+SELECT DISTINCT category, source,count(*)
+FROM forbes_billionaires_2022
+WHERE category = 'Manufacturing'
+GROUP BY category, source
+ORDER BY count(*) DESC
+
+--Which sources are most profitable in Real Estate
+SELECT DISTINCT category, source,count(*)
+FROM forbes_billionaires_2022
+WHERE category = 'Real Estate'
+GROUP BY category, source
+ORDER BY count(*) DESC
+
+-- Which country hosts the most billionares
+SELECT country, state, city, count(*) AS [Number of billionaires]
+FROM forbes_billionaires_2022
+GROUP BY country, state, city
+ORDER BY  [Number of billionares] DESC
+
+SELECT country, count(*) AS [Number of billionaires]
+FROM forbes_billionaires_2022
+GROUP BY country
+ORDER BY  [Number of billionaires] DESC
+
+-- who are the billionaires from south africa
+SELECT *
+FROM forbes_billionaires_2022
+WHERE country = 'South Africa'
+
+--how many male billionaires are there compared to females
+SELECT gender, count(*) AS [Number of Billionaires]
+FROM forbes_billionaires_2022
+WHERE gender IS NOT NULL
+GROUP BY gender
+
+-- How many self made billionaires are there
+SELECT selfMade, count(*) AS [Number of Billionaires]
+FROM forbes_billionaires_2022
+GROUP BY selfMade
+
+-- What's the average billionares age?
+SELECT round(avg(age),2) AS [Average billionaire age]
+FROM forbes_billionaires_2022
+
+-- number of billionares per age
+SELECT age, count(*) AS [Billionaires]
+FROM forbes_billionaires_2022
+WHERE age IS NOT NULL
+GROUP BY age
+
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
